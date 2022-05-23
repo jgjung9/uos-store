@@ -1,0 +1,29 @@
+{
+  "name": "uos-store-server",
+  "version": "1.0.0",
+  "description": "uos-store website project",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgjung9/uos-store.git"
+  },
+  "author": "Gio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgjung9/uos-store/issues"
+  },
+  "homepage": "https://github.com/jgjung9/uos-store#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-async-error": "^0.0.2",
+    "helmet": "^5.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.16"
+  }
+}
