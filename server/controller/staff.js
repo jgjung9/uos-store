@@ -28,7 +28,7 @@ export async function login(req, res) {
     const { staff_no, password } = req.body;
     const staff = await staffRepository.findByStaffNo(staff_no);
     if (!staff) {
-        return res.status(401).json({ message: '없는 직원' });
+        return res.status(401).json({ message: '없는 직원입니다.' });
     }
     const isValidPassword = await bcrypt.compare(password, staff.password);
     if (!isValidPassword) {
@@ -49,5 +49,14 @@ export async function me(req, res) {
     if (!staff) {
         return res.status(404).json({ message: '없는 직원입니다.' });
     }
-    res.status(200).json({ token: req.token, staff_no: staff.staff_no });
+    res.status(200).json(staff);
+}
+
+export async function all(req, res) {
+    const staff = await staffRepository.findByStaffNo(req.staff_no);
+    if (staff.position_cd !== '01') {
+        return res.status(401).json({ message: '권한이 없습니다.' });
+    }
+    const data = await staffRepository.getAll();
+    res.status(200).json(data);
 }

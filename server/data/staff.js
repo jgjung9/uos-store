@@ -29,3 +29,7 @@ export async function createStaff(staff) {
     staffs.push(created);
     return staff.staff_no;
 }
+
+export async function getAll() {
+    return staffs;
+}

@@ -29,4 +29,7 @@ router.post('/login', validateCredential, staffController.login);
 // GET /staff/me
 router.get('/me', isAuth, staffController.me);
 
+// GET /staff/all
+router.get('/all', isAuth, staffController.all);
+
 export default router;
