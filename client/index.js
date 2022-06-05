@@ -4,8 +4,8 @@ const baseURL = 'http://localhost:8080'; // 서버 port값에 따라 수정
 let url = '/staff/login'; // 요청하는 url 정보에 따라 수정
 
 // request body 부분으로 어떤 요청이냐에 따라 수정
-const staff_no = '12345678';
-const password = '12345';
+const staff_no = '12345678'; // html에서 입력을 받아와서 저장
+const password = '12345'; // html에서 입력을 받아와서 저장
 const body = {
     staff_no: staff_no,
     password: password,
