@@ -10,6 +10,8 @@ const body = {
     staff_no: staff_no,
     password: password,
 };
+
+// 로그인 요청 부분
 let res = await fetch(`${baseURL}${url}`, {
     method: 'POST',
     headers: {
@@ -26,6 +28,7 @@ const token = data.token;
 console.log(data);
 console.log(token);
 
+// token을 함께 보냈을 때, 자신의 직원 정보를 요청하는 경우
 url = '/staff/me';
 res = await fetch(`${baseURL}${url}`, {
     method: 'GET',
