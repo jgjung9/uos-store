@@ -5,7 +5,7 @@ import { config } from '../config.js';
 import * as staffRepository from '../data/staff.js';
 
 export async function signup(req, res) {
-    const { staff_no, password, staff_nm, position_cd, account_no } = req.body;
+    const { staff_no, password, staff_nm, position_cd } = req.body;
     const found = await staffRepository.findByStaffNo(staff_no);
     if (found) {
         return res.status(409).json({ message: `${staff_no} already exists` });
@@ -15,10 +15,9 @@ export async function signup(req, res) {
     // staff_no 반환된다.
     const staff = await staffRepository.createStaff({
         staff_no,
-        staff_nm,
         password: hashed,
+        staff_nm,
         position_cd,
-        account_no,
     });
     const token = createJwtToken(staff);
     res.status(201).json({ token, staff_no });
@@ -30,7 +29,7 @@ export async function login(req, res) {
     if (!staff) {
         return res.status(401).json({ message: '없는 직원입니다.' });
     }
-    const isValidPassword = await bcrypt.compare(password, staff.password);
+    const isValidPassword = await bcrypt.compare(password, staff.PASSWORD);
     if (!isValidPassword) {
         return res.status(401).json({ message: '비밀번호를 틀렸습니다.' });
     }
@@ -54,7 +53,7 @@ export async function me(req, res) {
 
 export async function all(req, res) {
     const staff = await staffRepository.findByStaffNo(req.staff_no);
-    if (staff.position_cd !== '01') {
+    if (staff.POSITION_CD !== '01') {
         return res.status(401).json({ message: '권한이 없습니다.' });
     }
     const data = await staffRepository.getAll();
