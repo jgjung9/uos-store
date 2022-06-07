@@ -20,7 +20,7 @@ export const isAuth = async (req, res, next) => {
         if (!staff) {
             return res.status(401).json(AUTH_ERROR);
         }
-        req.staff_no = staff.staff_no;
+        req.staff_no = staff.STAFF_NO;
         next();
     });
 };
