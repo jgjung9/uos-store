@@ -1,8 +1,10 @@
 # uos-store
 
+DB설계 프로젝트
 uos25 재고관리 시스템 서버 (Node.js 기반)
 
-사용 방식 server 폴더를 터미널에서 열고 
+사용 방식 
+server 폴더를 터미널에서 열고 
 ``` 
 npm i
 ```
