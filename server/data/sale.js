@@ -1,42 +1,65 @@
-import { db } from '../db/database.js';
+import { db, format } from '../db/database.js';
 
 export async function all() {
-    return db
-        .execute(`SELECT * FROM SALE`)
-        .then((result) => console.log(result))
-        .catch(console.error);
+  return await db
+    .execute(`SELECT * FROM SALE`, {}, { outFormat: format })
+    .then((result) => result.rows);
 }
 
 export async function findBySaleNo(sale_no) {
-    return db
-        .execute(`SELECT * FROM SALE WHERE SALE_NO=?`, sale_no)
-        .then((result) => console.log(result));
+  return await db
+    .execute(`SELECT * FROM SALE WHERE SALE_NO=(:1)`, [sale_no], {
+      outFormat: format,
+    })
+    .then((result) => result.rows[0]);
 }
 
 export async function createSale(sale) {
-    const sql = `INSERT INTO SALE (staff_no, sale_won, received_won, customer_no, used_mileage, pay_cd) value(?,?,?,?,?,?)`;
-    const {
+  const sql = `INSERT INTO SALE VALUES((:1),(:2),(:3),(:4),(:5),(:6),(:7))`;
+
+  const date = new Date();
+  const sale_dt =
+    date.getFullYear().toString() +
+    '-' +
+    (date.getMonth() + 1) +
+    '-' +
+    date.getDate().toString();
+  const { sale_no, sale_won, received_won, customer_no, used_mileage, pay_cd } =
+    sale;
+
+  await db
+    .execute(
+      sql,
+      [
         sale_no,
-        sale_won,
-        received_won,
+        sale_dt,
+        +sale_won,
+        +received_won,
         customer_no,
-        used_mileage,
+        +used_mileage,
         pay_cd,
-    } = sale;
-    return db
-        .execute(sql, [
-            sale_no,
-            sale_won,
-            received_won,
-            customer_no,
-            used_mileage,
-            pay_cd,
-        ])
-        .then((result) => console.log(result));
+      ],
+      { outFormat: format }
+    )
+    .then(console.log);
 }
 
 export async function deleteBySaleNo(sale_no) {
-    return db
-        .execute(`DELETE FROM SALE WHERE sale_no=?`, sale_no)
-        .then((result) => console.log(result));
+  return await db
+    .execute(`DELETE FROM SALE WHERE SALE_NO=(:1)`, [sale_no], {
+      outFormat: format,
+    })
+    .then(console.log);
+}
+
+export async function updateSale(sale) {
+  const { sale_no, sale_won, received_won, cutomer_no, used_mileage, pay_cd } =
+    sale;
+  return db.execute(
+    `UPDATE SALE 
+    SALE_WON=(:1) RECEIVED_WON=(:2) CUSTOMER_NO=(:3) USED_MILEAGE=(:4) PAY_CD=(:5) 
+    WHERE SALE_NO=(:6)`,
+    [sale_won, received_won, cutomer_no, used_mileage, pay_cd, sale_no],
+    { outFormat: format }
+  );
 }
