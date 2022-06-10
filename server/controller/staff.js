@@ -60,3 +60,15 @@ export async function all(req, res) {
   const data = await staffRepository.getAll();
   res.status(200).json(data);
 }
+
+export async function discharge(req, res) {
+  const staff = await staffRepository.findByStaffNo(req.staff_no);
+  console.log(staff);
+  if (staff.POSITION_CD !== '01') {
+    return res.status(401).json({ messaga: '권한이 없습니다.' });
+  }
+  const dischargeStaffNo = req.params.staff_no;
+  console.log(dischargeStaffNo);
+  await staffRepository.dischargeStaff(dischargeStaffNo);
+  res.status(200).json();
+}
