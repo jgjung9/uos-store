@@ -7,6 +7,8 @@ import { config } from './config.js';
 import staffRouter from './routes/staff.js';
 import saleRouter from './routes/sale.js';
 import refundRouter from './routes/refund.js';
+import requestListRouter from './routes/request_list.js';
+import returnRouter from './routes/return.js';
 
 const app = express();
 app.use(express.json());
@@ -17,6 +19,8 @@ app.use(morgan('tiny'));
 app.use('/staff', staffRouter);
 app.use('/sale', saleRouter);
 app.use('/refund', refundRouter);
+app.use('/request_list', requestListRouter);
+app.use('/return', returnRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

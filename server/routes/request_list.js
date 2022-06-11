@@ -3,15 +3,11 @@ import 'express-async-error';
 import { body } from 'express-validator';
 import { validate } from '../middleware/validator.js';
 import { isAuth } from '../middleware/staff.js';
-import * as returnController from '../controller/return.js';
+import * as requestController from '../controller/request_list.js';
 
 const router = express.Router();
 
-// GET /return or /return?return_no=:return_no
-router.get('/return');
-// POST /return/add
-
-// 구현 보류
-// DELETE /return/:return_no
+// POST /request_list/add
+router.post('/add', isAuth, requestController.add);
 
 export default router;

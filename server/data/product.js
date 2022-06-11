@@ -61,3 +61,11 @@ export async function getWonByProductNo(product_no) {
     )
     .then((result) => result.rows[0]);
 }
+
+export async function getProduct(product_no) {
+  return await db
+    .execute(`SELECT * FROM PRODUCT WHERE PRODUCT_NO=(:1)`, [product_no], {
+      outFormat: format,
+    })
+    .then((result) => result.rows[0]);
+}
