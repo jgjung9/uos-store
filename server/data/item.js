@@ -7,3 +7,12 @@ export async function getItemByNo(item_no) {
     })
     .then((result) => result.rows[0]);
 }
+
+export async function getProductNo(itemNo) {
+  const product_no = await db
+    .execute(`SELECT PRODUCT_NO FROM ITEM WHERE ITEM_NO=(:1)`, [itemNo], {
+      outFormat: format,
+    })
+    .then((result) => result.rows[0]);
+  return product_no.PRODUCT_NO;
+}
