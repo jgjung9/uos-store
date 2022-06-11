@@ -13,12 +13,12 @@ const router = express.Router();
 router.get('/', isAuth, refundController.getAll);
 
 // GET /refund/:item_no 아이템 번호에 해당하는 환불정보를 가져옵니다.
-router.get('/:item_no', isAuth, refundController.getByItemNo);
+router.get('/:item_no', isAuth, refundController.getRefundByItemNo);
 
 // POST /refund/add 환불 정보를 추가합니다.
 router.post('/add', isAuth, refundController.add);
 
 // DELETE /refund/:item_no 아이템 번호에 해당하는 환불정보를 삭제합니다.
-router.delete('/:item_no', isAuth, refundController.remove);
+router.delete('/:item_no', isAuth, refundController.deleteByItemNo);
 
 export default router;

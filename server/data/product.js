@@ -51,3 +51,13 @@ export async function plusStockUpdate(items) {
       .then(console.log);
   }
 }
+
+export async function getWonByProductNo(product_no) {
+  return await db
+    .execute(
+      `SELECT PRODUCT_WON FROM PRODUCT WHERE PRODUCT_NO=(:1)`,
+      [product_no],
+      { outFormat: format }
+    )
+    .then((result) => result.rows[0]);
+}

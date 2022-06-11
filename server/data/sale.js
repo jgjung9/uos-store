@@ -63,3 +63,18 @@ export async function updateSale(sale) {
     { outFormat: format }
   );
 }
+
+export async function minusUpdateWon(sale_no, won) {
+  const sale_won = await db
+    .execute(`SELECT SALE_WON FROM SALE WHERE SALE_NO=(:1)`, [sale_no], {
+      outFormat: format,
+    })
+    .then((result) => result.rows[0]);
+  return db
+    .execute(
+      `UPDATE SALE SET SALE_WON=(:1) WHERE SALE_NO=(:2)`,
+      [sale_won.SALE_WON - won, sale_no],
+      { outFormat: format }
+    )
+    .then(console.log);
+}

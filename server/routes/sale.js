@@ -17,6 +17,6 @@ router.get('/', isAuth, saleController.getSale);
 router.post('/add', isAuth, saleController.add);
 
 // DELETE /sale/:sale_no 파라미터로 넘어온 판매번호에 해당하는 정보를 삭제한다.
-router.delete('/:sale_no', saleController.deleteSale);
+router.delete('/:sale_no', isAuth, saleController.deleteSale);
 
 export default router;

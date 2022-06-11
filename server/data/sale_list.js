@@ -19,6 +19,14 @@ export async function createSaleList(sale_no, items) {
   }
 }
 
+export async function deleteSaleListByItemNo(item_no) {
+  await db
+    .execute(`DELETE FROM SALE_LIST WHERE ITEM_NO=(:1)`, [item_no], {
+      outFormat: format,
+    })
+    .then(console.log);
+}
+
 // 판매번호에 해당하는 판매목록 삭제 및 재고량 업데이트
 export async function deleteSaleListByNo(sale_no) {
   const items = await db
