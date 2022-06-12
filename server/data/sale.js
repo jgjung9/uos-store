@@ -3,7 +3,8 @@ import { db, format } from '../db/database.js';
 export async function all() {
   return await db
     .execute(`SELECT * FROM SALE`, {}, { outFormat: format })
-    .then((result) => result.rows);
+    .then((result) => result.rows)
+    .catch(console.error);
 }
 
 export async function findBySaleNo(sale_no) {
@@ -11,7 +12,8 @@ export async function findBySaleNo(sale_no) {
     .execute(`SELECT * FROM SALE WHERE SALE_NO=(:1)`, [sale_no], {
       outFormat: format,
     })
-    .then((result) => result.rows[0]);
+    .then((result) => result.rows[0])
+    .catch(console.error);
 }
 
 export async function createSale(sale) {
@@ -41,7 +43,8 @@ export async function createSale(sale) {
       ],
       { outFormat: format }
     )
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }
 
 export async function deleteBySaleNo(sale_no) {
@@ -49,19 +52,23 @@ export async function deleteBySaleNo(sale_no) {
     .execute(`DELETE FROM SALE WHERE SALE_NO=(:1)`, [sale_no], {
       outFormat: format,
     })
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }
 
 export async function updateSale(sale) {
   const { sale_no, sale_won, received_won, cutomer_no, used_mileage, pay_cd } =
     sale;
-  return db.execute(
-    `UPDATE SALE 
+  return db
+    .execute(
+      `UPDATE SALE 
     SALE_WON=(:1) RECEIVED_WON=(:2) CUSTOMER_NO=(:3) USED_MILEAGE=(:4) PAY_CD=(:5) 
     WHERE SALE_NO=(:6)`,
-    [sale_won, received_won, cutomer_no, used_mileage, pay_cd, sale_no],
-    { outFormat: format }
-  );
+      [sale_won, received_won, cutomer_no, used_mileage, pay_cd, sale_no],
+      { outFormat: format }
+    )
+    .then(console.log)
+    .catch(console.error);
 }
 
 export async function minusUpdateWon(sale_no, won) {
@@ -76,5 +83,6 @@ export async function minusUpdateWon(sale_no, won) {
       [sale_won.SALE_WON - won, sale_no],
       { outFormat: format }
     )
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }

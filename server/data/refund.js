@@ -3,7 +3,8 @@ import { db, format } from '../db/database.js';
 export async function all() {
   return await db
     .execute(`SELECT * FROM REFUND`, {}, { outFormat: format })
-    .then((result) => result.rows);
+    .then((result) => result.rows)
+    .catch(console.error);
 }
 
 export async function getRefundByItemNo(item_no) {
@@ -11,7 +12,8 @@ export async function getRefundByItemNo(item_no) {
     .execute(`SELECT * FROM REFUND WHERE ITEM_NO=(:1)`, [item_no], {
       outFormat: format,
     })
-    .then((result) => result.rows[0]);
+    .then((result) => result.rows[0])
+    .catch(console.error);
 }
 
 export async function addRefund(refund) {
@@ -23,7 +25,8 @@ export async function addRefund(refund) {
       [item_no, refund_reason, item_status],
       { outFormat: format }
     )
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }
 
 export async function deleteRefund(refund) {
@@ -32,5 +35,6 @@ export async function deleteRefund(refund) {
     .execute(`DELETE FROM REFUND WHERE item_no=(:1)`, [item_no], {
       outFormat: format,
     })
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }

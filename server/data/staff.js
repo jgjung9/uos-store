@@ -5,13 +5,15 @@ export async function findByStaffNo(staff_no) {
     .execute(`SELECT * FROM STAFF WHERE STAFF_NO=(:1)`, [staff_no], {
       outFormat: format,
     })
-    .then((result) => result.rows[0]);
+    .then((result) => result.rows[0])
+    .catch(console.error);
 }
 
 export async function getAll() {
   return db
     .execute(`SELECT * FROM STAFF`, {}, { outFormat: format })
-    .then((result) => result.rows);
+    .then((result) => result.rows)
+    .catch(console.error);
 }
 
 export async function createStaff(staff) {

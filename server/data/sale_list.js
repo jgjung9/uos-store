@@ -51,5 +51,6 @@ async function deleteSaleList(sale_no) {
     .execute(`DELETE FROM SALE_LIST WHERE SALE_NO=(:1)`, [sale_no], {
       outFormat: format,
     })
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }

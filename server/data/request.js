@@ -12,10 +12,12 @@ export async function createRequest(staffNo) {
   const staff_no = staffNo;
   const store_no = '12345671';
   console.log(request_no, request_dt, staff_no, store_no);
-  await db.execute(
-    `INSERT INTO REQUEST VALUES((:1),(:2),(:3),(:4))`,
-    [request_no, request_dt, staff_no, store_no],
-    { outFormat: format }
-  );
+  await db
+    .execute(
+      `INSERT INTO REQUEST VALUES((:1),(:2),(:3),(:4))`,
+      [request_no, request_dt, staff_no, store_no],
+      { outFormat: format }
+    )
+    .catch(console.error);
   return request_no;
 }

@@ -9,7 +9,8 @@ export async function createReturnList(returnList) {
       [return_won, return_reason, return_no, item_no],
       { outFormat: format }
     )
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }
 
 export async function getReturnList(item_no) {
@@ -17,5 +18,6 @@ export async function getReturnList(item_no) {
     .execute(`SELECT * FROM RETURN_LIST WHERE ITEM_NO=(:1)`, [item_no], {
       outFormat: format,
     })
-    .then((result) => result.rows[0]);
+    .then((result) => result.rows[0])
+    .catch(console.error);
 }

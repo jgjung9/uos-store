@@ -12,10 +12,21 @@ export async function createReturn(staffNo) {
   const staff_no = staffNo;
   const store_no = '12345671';
   console.log(return_no, return_dt, staff_no, store_no);
-  await db.execute(
-    `INSERT INTO RETURN VALUES((:1),(:2),(:3),(:4))`,
-    [return_no, return_dt, staff_no, store_no],
-    { outFormat: format }
-  );
+  await db
+    .execute(
+      `INSERT INTO RETURN VALUES((:1),(:2),(:3),(:4))`,
+      [return_no, return_dt, staff_no, store_no],
+      { outFormat: format }
+    )
+    .catch(console.error);
   return return_no;
+}
+
+export async function getReturnByDate(date) {
+  return await db
+    .execute('SELECT * FROM RETURN WHERE RETURN_DT=(:1)', [date], {
+      outFormat: format,
+    })
+    .then((result) => result.rows)
+    .catch(console.error);
 }

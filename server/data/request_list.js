@@ -9,5 +9,6 @@ export async function createRequestList(requestList) {
       [request_cnt, request_won, request_no, product_no],
       { outFormat: format }
     )
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 }
