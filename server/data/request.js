@@ -21,3 +21,12 @@ export async function createRequest(staffNo) {
     .catch(console.error);
   return request_no;
 }
+
+export async function getRequestByDate(date) {
+  return await db
+    .execute(`SELECT * FROM REQUEST WHERE REQUEST_DT=(:1)`, [date], {
+      outFormat: format,
+    })
+    .then((result) => result.rows)
+    .catch(console.error);
+}

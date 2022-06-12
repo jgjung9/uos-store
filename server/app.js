@@ -9,6 +9,8 @@ import saleRouter from './routes/sale.js';
 import refundRouter from './routes/refund.js';
 import requestListRouter from './routes/request_list.js';
 import returnListRouter from './routes/return_list.js';
+import requestRouter from './routes/request.js';
+import returnRouter from './routes/return.js';
 
 const app = express();
 app.use(express.json());
@@ -21,6 +23,8 @@ app.use('/sale', saleRouter);
 app.use('/refund', refundRouter);
 app.use('/request_list', requestListRouter);
 app.use('/return_list', returnListRouter);
+app.use('/request', requestRouter);
+app.use('/return', returnRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
