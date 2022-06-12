@@ -10,7 +10,7 @@ export async function add(req, res) {
   if (loginStaff.POSITION_CD !== '01') {
     return res.status(401).json({ message: '권환이 없습니다.' });
   }
-  const items = req.body.items;
+  const items = req.body;
 
   if (items.length <= 0) {
     return res

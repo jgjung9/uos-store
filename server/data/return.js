@@ -1,14 +1,8 @@
 import { db, format } from '../db/database.js';
 
-let cnt = 0;
-
 export async function createReturn(staffNo) {
   const date = new Date();
-  const return_no =
-    date.getFullYear().toString() +
-    (date.getMonth() + 1).toString() +
-    date.getDate() +
-    (cnt++).toString();
+  const return_no = date.getTime().toString().slice(5);
   const return_dt =
     date.getFullYear().toString() +
     '-' +

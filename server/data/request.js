@@ -1,14 +1,8 @@
 import { db, format } from '../db/database.js';
 
-let cnt = 0;
-
 export async function createRequest(staffNo) {
   const date = new Date();
-  const request_no =
-    date.getFullYear().toString() +
-    (date.getMonth() + 1).toString() +
-    date.getDate() +
-    (cnt++).toString();
+  const request_no = date.getTime().toString().slice(5);
   const request_dt =
     date.getFullYear().toString() +
     '-' +

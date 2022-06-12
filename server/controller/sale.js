@@ -31,7 +31,6 @@ export async function add(req, res) {
     pay_cd: pay_cd,
   };
   const { items } = req.body;
-
   // 아이템이 목록에 존재하는지 확인
   // 만약 판매된 물품이 있는경우 거절
   for (let i = 0; i < items.length; i++) {
